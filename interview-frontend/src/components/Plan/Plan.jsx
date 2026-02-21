@@ -9,6 +9,7 @@ import {
 import Layout from '../Layout/Layout';
 import ProcedureItem from "./ProcedureItem/ProcedureItem";
 import PlanProcedureItem from "./PlanProcedureItem/PlanProcedureItem";
+import { PlanProcedureUserItem } from "./PlanProcedureUserItem/PlanProcedureUserItem";
 
 const Plan = () => {
   let { id } = useParams();
@@ -80,8 +81,15 @@ const Plan = () => {
                     <h4>Added to Plan</h4>
                     <div>
                       {planProcedures.map((p) => (
-                        <PlanProcedureItem
+                        // <PlanProcedureItem
+                        //   key={p.procedure.procedureId}
+                        //   procedure={p.procedure}
+                        //   users={users}
+                        // />
+                        <PlanProcedureUserItem
                           key={p.procedure.procedureId}
+                          planId={id}
+                          procedureId={p.procedure.procedureId}
                           procedure={p.procedure}
                           users={users}
                         />

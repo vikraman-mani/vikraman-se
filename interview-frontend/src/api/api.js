@@ -65,3 +65,43 @@ export const getUsers = async () => {
 
     return await response.json();
 };
+
+export const loadAssignedUsers = async (planId, procedureId) => {
+    const url = `${api_url}/api/ProcedurePlanUser/${planId}/${procedureId}`;
+    const response = await fetch(url, {
+        method: "GET",
+    });
+    if (!response.ok) throw new Error("Failed to load assigned users");
+    return await response.json();
+};
+
+export const addUser = async (planId, procedureId, userId) => {
+    const url = `${api_url}/api/ProcedurePlanUser`;
+    const response = await fetch(url, { 
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",     
+        },
+        body: JSON.stringify({ planId, procedureId, userId }),
+    });
+    if (!response.ok) throw new Error("Failed to add user");
+    return true;
+}
+
+export const removeUser = async (planId, procedureId, userId) => {
+    const url = `${api_url}/api/ProcedurePlanUser/${planId}/${procedureId}/${userId}`;
+    const response = await fetch(url, {
+        method: "DELETE",
+    });
+    if (!response.ok) throw new Error("Failed to remove user");
+    return true;
+}
+
+export const removeAllUser = async (planId, procedureId) => {
+    const url = `${api_url}/api/ProcedurePlanUser/${planId}/${procedureId}/remove-all`;
+    const response = await fetch(url, {
+        method: "DELETE",
+    });
+    if (!response.ok) throw new Error("Failed to remove all user");
+    return true;
+}

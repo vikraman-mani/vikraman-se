@@ -2,11 +2,13 @@ using System.Text.Json;
 using Microsoft.AspNetCore.OData;
 using RL.Data;
 using MediatR;
+using RL.Backend.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddMediatR(typeof(Program));
+builder.Services.AddScoped<IProcedurePlanUserService, ProcedurePlanUserService>();
 builder.Services.AddSqlite<RLContext>("Data Source=Database.db");
 builder.Services.AddControllers()
     .AddOData(options => options.Select().Filter().Expand().OrderBy())
@@ -23,7 +25,7 @@ builder.Services.AddCors(options =>
     options.AddPolicy(name: corsPolicy,
     policy =>
     {
-        policy.WithOrigins("http://localhost:3001").AllowAnyHeader().AllowAnyMethod();
+        policy.WithOrigins("http://localhost:3000").AllowAnyHeader().AllowAnyMethod();
     });
 });
 
