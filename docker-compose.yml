@@ -25,4 +25,4 @@ services:
     environment:
       - DOTNET_ENVIRONMENT=Development
     ports:
-      - 10010:80
+      - 10010:8080
